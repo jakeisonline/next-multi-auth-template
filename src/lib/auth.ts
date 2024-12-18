@@ -8,6 +8,7 @@ import { sessionsTable } from "@/db/schema/sessions"
 import { verificationTokensTable } from "@/db/schema/verification_tokens"
 import Resend from "next-auth/providers/resend"
 import { NextRequest } from "next/server"
+import { fetchUserAccounts } from "@/actions/users"
 
 declare module "next-auth" {
   interface Session {
@@ -65,18 +66,26 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         return false
       }
 
-      const userAccountId = userSession.user.accountId
-
       if (userSession.user) {
-        if (userAccountId) {
-          const sessionBlockedPaths = [
-            "/signin",
-            "/signup",
-          ]
+        const userAccounts = await fetchUserAccounts(userSession.user.id)
 
-          if (sessionBlockedPaths.some((m) => requestedPath.includes(m))) {
-            return Response.redirect(new URL("/app", request.nextUrl))
-          }
+        if (userAccounts.length === 0 && requestedPath.includes("/welcome")) {
+          return true
+        }
+
+        const sessionBlockedPaths = [
+          "/signin",
+          "/signup",
+          "/verify",
+          "/welcome",
+        ]
+
+        if (sessionBlockedPaths.some((m) => requestedPath.includes(m))) {
+          return Response.redirect(new URL("/app", request.nextUrl))
+        }
+
+        if (userAccounts.length === 0) {
+          return Response.redirect(new URL("/welcome", request.nextUrl))
         }
       }
 
