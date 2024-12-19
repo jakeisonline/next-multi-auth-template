@@ -39,7 +39,7 @@ export const usersAccountsTable = table(
       t.accountId,
     ),
     uniqueOwnersAccounts: uniqueIndex("unique_owners_accounts")
-      .on(t.accountId, t.userId, t.role)
+      .on(t.accountId, t.role)
       // cf. https://github.com/drizzle-team/drizzle-orm/issues/3349#issuecomment-2452165710
       .where(eq(t.role, sql`'owner'`)),
   }),
