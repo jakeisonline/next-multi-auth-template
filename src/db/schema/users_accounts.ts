@@ -32,7 +32,6 @@ export const usersAccountsTable = table(
     status: usersAccountStatuses("status").notNull().default("pending"),
     role: userAccountsRoles("role").notNull().default("user"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
-    deletedAt: timestamp("deleted_at"),
   },
   (t) => ({
     uniqueUsersAccounts: uniqueIndex("unique_users_accounts").on(
