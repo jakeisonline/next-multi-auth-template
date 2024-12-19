@@ -1,6 +1,6 @@
 "use client"
 
-import { doAccountSetup } from "@/actions/accounts"
+import { doAccountSetup } from "@/actions/account/do-account-setup"
 
 import {
   Card,

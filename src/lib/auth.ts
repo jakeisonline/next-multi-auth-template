@@ -8,7 +8,7 @@ import { sessionsTable } from "@/db/schema/sessions"
 import { verificationTokensTable } from "@/db/schema/verification_tokens"
 import Resend from "next-auth/providers/resend"
 import { NextRequest } from "next/server"
-import { fetchUserAccounts } from "@/actions/users"
+import { fetchUserAccounts } from "@/actions/user/fetch-user-accounts"
 
 declare module "next-auth" {
   interface Session {
