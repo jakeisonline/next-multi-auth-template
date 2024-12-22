@@ -24,10 +24,12 @@ export default async function InvitePage({
     throw new Error("You must be signed in to accept an invite")
   }
 
-  const token = await (await params).token
+  const token = (await params).token
   const invite = await fetchInvite(token[0])
 
+  // If the invite is not found, return a 404
   if (invite.length === 0) {
+    console.warn(`Invite not found with token: ${token[0]}`)
     notFound()
   }
 
@@ -40,13 +42,20 @@ export default async function InvitePage({
   // If the user is already a member of the account, error
   // TODO: Redirect to the account page instead of throwing an error
   if (userAccount.length > 0) {
-    throw new Error("User already a member of this account")
+    console.info(
+      `User already a member of account (${invite[0].accountId}) with invite token (${token[0]})`,
+    )
+    notFound()
   }
 
   const account = await fetchAccount(invite[0].accountId)
 
+  // If the account is not found, return a 404
   if (account.length === 0) {
-    throw new Error("Account not found with id: " + invite[0].accountId)
+    console.warn(
+      `Legit invite token found (${token[0]}), but account not found (${invite[0].accountId})`,
+    )
+    notFound()
   }
 
   return (
