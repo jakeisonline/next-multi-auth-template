@@ -1,5 +1,3 @@
-"use client"
-
 import {
   BadgeCheck,
   Bell,
@@ -9,11 +7,7 @@ import {
   Sparkles,
 } from "lucide-react"
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,6 +23,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { SignOutButton } from "@/components/sign-out-button"
 
 export function NavUser({
   user,
@@ -104,7 +99,9 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
-              Log out
+              <SignOutButton className="hover:no-underline p-0 h-0">
+                Sign out
+              </SignOutButton>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
