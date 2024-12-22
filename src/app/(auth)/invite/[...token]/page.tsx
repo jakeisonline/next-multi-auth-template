@@ -10,8 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { notFound } from "next/navigation"
+import { AcceptInviteButton } from "@/components/accept-invite-button"
 
 export default async function InvitePage({
   params,
@@ -67,7 +67,9 @@ export default async function InvitePage({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Button className="w-full">Join {account[0].name}</Button>
+        <AcceptInviteButton token={token[0]}>
+          Join {account[0].name}
+        </AcceptInviteButton>
       </CardContent>
     </Card>
   )
