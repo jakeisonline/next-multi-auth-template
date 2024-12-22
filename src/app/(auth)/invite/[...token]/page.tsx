@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { notFound } from "next/navigation"
 
 export default async function InvitePage({
   params,
@@ -27,7 +28,7 @@ export default async function InvitePage({
   const invite = await fetchInvite(token[0])
 
   if (invite.length === 0) {
-    throw new Error("Invite not found with token: " + token[0])
+    notFound()
   }
 
   // Check if current user is already a member of the account
@@ -36,6 +37,8 @@ export default async function InvitePage({
     invite[0].accountId,
   )
 
+  // If the user is already a member of the account, error
+  // TODO: Redirect to the account page instead of throwing an error
   if (userAccount.length > 0) {
     throw new Error("User already a member of this account")
   }
