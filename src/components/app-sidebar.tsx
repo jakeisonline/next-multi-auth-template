@@ -6,7 +6,6 @@ import {
   Command,
   GalleryVerticalEnd,
   Package,
-  Settings2,
   ShoppingCart,
   Users,
 } from "lucide-react"
@@ -51,7 +50,6 @@ const data = {
       title: "Products",
       url: "#",
       icon: Package,
-      isActive: true,
       items: [
         {
           title: "Overview",
@@ -101,25 +99,6 @@ const data = {
         },
         {
           title: "Tutorials",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
           url: "#",
         },
       ],
