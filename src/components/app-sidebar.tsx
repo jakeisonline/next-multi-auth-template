@@ -3,12 +3,12 @@
 import * as React from "react"
 import {
   AudioWaveform,
-  BookOpen,
-  Bot,
   Command,
   GalleryVerticalEnd,
+  Package,
   Settings2,
-  SquareTerminal,
+  ShoppingCart,
+  Users,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -48,63 +48,59 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
+      title: "Products",
       url: "#",
-      icon: SquareTerminal,
+      icon: Package,
       isActive: true,
       items: [
         {
-          title: "History",
+          title: "Overview",
           url: "#",
         },
         {
-          title: "Starred",
+          title: "Active",
           url: "#",
         },
         {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
+          title: "Inactive",
           url: "#",
         },
       ],
     },
     {
-      title: "Documentation",
+      title: "Orders",
       url: "#",
-      icon: BookOpen,
+      icon: ShoppingCart,
       items: [
         {
-          title: "Introduction",
+          title: "Overview",
           url: "#",
         },
         {
-          title: "Get Started",
+          title: "Unfulfilled",
+          url: "#",
+        },
+        {
+          title: "Fulfilled",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Customers",
+      url: "#",
+      icon: Users,
+      items: [
+        {
+          title: "Overview",
+          url: "#",
+        },
+        {
+          title: "Inactive",
           url: "#",
         },
         {
           title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
           url: "#",
         },
       ],
@@ -124,10 +120,6 @@ const data = {
         },
         {
           title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
           url: "#",
         },
       ],
