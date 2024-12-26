@@ -24,11 +24,6 @@ import { User } from "next-auth"
 
 // This is sample data.
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   accounts: [
     {
       name: "Acme Inc",
