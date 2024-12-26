@@ -92,10 +92,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return true
     },
     session: async ({ session, user }) => {
-      const userAccounts = await fetchUserAccounts(user.id)
+      // Don't set the accountId if it's already set
+      if (!session.user.accountId) {
+        const userAccounts = await fetchUserAccounts(user.id)
 
-      if (userAccounts.length > 0) {
-        session.user.accountId = userAccounts[0].accountId ?? ""
+        // Only set accountId if user has at least one account
+        if (userAccounts.length > 0) {
+          session.user.accountId = userAccounts[0].accountId ?? ""
+        }
       }
 
       return session
