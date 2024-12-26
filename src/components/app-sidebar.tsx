@@ -21,6 +21,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { User } from "next-auth"
+import { FetchCurrentUserResponse } from "@/actions/auth/fetch-current-user"
 
 // This is sample data.
 const data = {
@@ -102,11 +103,13 @@ const data = {
 export function AppSidebar({
   currentUser,
   ...props
-}: React.ComponentProps<typeof Sidebar> & { currentUser: User }) {
+}: React.ComponentProps<typeof Sidebar> & {
+  currentUser: NonNullable<FetchCurrentUserResponse>
+}) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <AccountSwitcher accounts={data.accounts} />
+        <AccountSwitcher accounts={currentUser.accounts} />
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />

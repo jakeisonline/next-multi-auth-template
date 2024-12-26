@@ -26,9 +26,13 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { SignOutButton } from "@/components/sign-out-button"
-import { User } from "next-auth"
+import { FetchCurrentUserResponse } from "@/actions/auth/fetch-current-user"
 
-export function NavUser({ user }: { user: User }) {
+export function NavUser({
+  user,
+}: {
+  user: NonNullable<FetchCurrentUserResponse>
+}) {
   const { isMobile } = useSidebar()
 
   return (
