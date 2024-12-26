@@ -1,6 +1,4 @@
 import { fetchCurrentUser } from "@/actions/auth/fetch-current-user"
-import { fetchUserAccounts } from "@/actions/user/fetch-user-accounts"
-import { getUserSession } from "@/actions/user/get-user-session"
 import { AppSidebar } from "@/components/app-sidebar"
 import {
   Breadcrumb,
