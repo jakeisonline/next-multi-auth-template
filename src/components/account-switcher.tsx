@@ -9,7 +9,6 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import {
@@ -25,7 +24,6 @@ export function AccountSwitcher({
   accounts: {
     name: string
     logo: React.ElementType
-    plan: string
   }[]
 }) {
   const { isMobile } = useSidebar()
@@ -47,7 +45,6 @@ export function AccountSwitcher({
                 <span className="truncate font-semibold">
                   {activeAccount.name}
                 </span>
-                <span className="truncate text-xs">{activeAccount.plan}</span>
               </div>
               <ChevronsUpDown className="ml-auto" />
             </SidebarMenuButton>
@@ -61,7 +58,7 @@ export function AccountSwitcher({
             <DropdownMenuLabel className="text-xs text-muted-foreground">
               Teams
             </DropdownMenuLabel>
-            {accounts.map((account, index) => (
+            {accounts.map((account) => (
               <DropdownMenuItem
                 key={account.name}
                 onClick={() => setActiveAccount(account)}
@@ -71,7 +68,6 @@ export function AccountSwitcher({
                   <account.logo className="size-4 shrink-0" />
                 </div>
                 {account.name}
-                <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
               </DropdownMenuItem>
             ))}
             <DropdownMenuSeparator />
