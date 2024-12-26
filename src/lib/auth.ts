@@ -94,7 +94,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     session: async ({ session, user }) => {
       const userAccounts = await fetchUserAccounts(user.id)
 
-      session.user.accountId = userAccounts[0].accountId ?? ""
+      if (userAccounts.length > 0) {
+        session.user.accountId = userAccounts[0].accountId ?? ""
+      }
+
       return session
     },
   },
