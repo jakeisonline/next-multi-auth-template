@@ -91,6 +91,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
       return true
     },
+    session: async ({ session, user }) => {
+      const userAccounts = await fetchUserAccounts(user.id)
+
+      session.user.accountId = userAccounts[0].accountId ?? ""
+      return session
+    },
   },
   secret: process.env.AUTH_SECRET,
 })

@@ -18,9 +18,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { getUserSession } from "@/actions/user/get-user-session"
 
 export default async function TeamSettingsPage() {
-  const users = await fetchUsers("eba6271e-e54d-4511-b76a-0aae14a22315")
+  const session = await getUserSession()
+  const users = await fetchUsers(session?.user.accountId ?? "")
 
   return (
     <div className="max-w-4xl">
