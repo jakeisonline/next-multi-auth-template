@@ -20,7 +20,6 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import { User } from "next-auth"
 import { FetchCurrentUserResponse } from "@/actions/auth/fetch-current-user"
 
 // This is sample data.
