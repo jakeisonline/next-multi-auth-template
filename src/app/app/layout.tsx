@@ -21,8 +21,6 @@ export default async function AppLayout({
 }>) {
   const session = await getUserSession()
 
-  console.log("rendered layout")
-
   return (
     <SidebarProvider>
       <AppSidebar currentUser={session?.user as User} />
