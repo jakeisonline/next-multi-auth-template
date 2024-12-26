@@ -12,7 +12,7 @@ import {
 
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
+import { AccountSwitcher } from "@/components/account-switcher"
 import {
   Sidebar,
   SidebarContent,
@@ -29,7 +29,7 @@ const data = {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
-  teams: [
+  accounts: [
     {
       name: "Acme Inc",
       logo: GalleryVerticalEnd,
@@ -114,7 +114,7 @@ export function AppSidebar({
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <AccountSwitcher accounts={data.accounts} />
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
