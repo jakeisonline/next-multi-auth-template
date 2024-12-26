@@ -16,6 +16,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
+import Link from "next/link"
 
 export function NavMain({
   items,
@@ -62,9 +63,9 @@ export function NavMain({
                 </SidebarMenuSubItem>
                 <SidebarMenuSubItem>
                   <SidebarMenuSubButton asChild>
-                    <a href="#">
+                    <Link href="/app/settings/team">
                       <span>Team</span>
-                    </a>
+                    </Link>
                   </SidebarMenuSubButton>
                 </SidebarMenuSubItem>
                 <SidebarMenuSubItem>
