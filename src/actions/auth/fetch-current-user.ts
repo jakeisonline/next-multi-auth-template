@@ -1,8 +1,7 @@
+import { auth } from "@/lib/auth"
 import { db } from "@/db"
 import { usersTable } from "@/db/schema/users"
-import { eq, sql } from "drizzle-orm"
-
-import { auth } from "@/lib/auth"
+import { eq } from "drizzle-orm"
 import { usersAccountsTable } from "@/db/schema/users_accounts"
 import { accountsTable } from "@/db/schema/accounts"
 
