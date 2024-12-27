@@ -19,6 +19,15 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { getUserSession } from "@/actions/user/get-user-session"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { ClipboardCopy, RefreshCcw } from "lucide-react"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 export default async function TeamSettingsPage() {
   const session = await getUserSession()
@@ -35,27 +44,61 @@ export default async function TeamSettingsPage() {
         <h3 className="text-xl">General Team Settings</h3>
         <div className="mt-4">
           <form action="" className="flex flex-col gap-2">
-            <input
-              type="hidden"
-              name="accountId"
-              value="9cc5bc0b-b634-437f-ab7e-9c425cd105b9"
-            />
-            <input type="hidden" name="type" value="multi_use" />
-
-            <div className="flex flex-row items-center justify-between rounded-lg border p-4 gap-2">
-              <div>
-                <Label
-                  htmlFor="global-invite-link"
-                  className="text-base font-semibold"
-                >
-                  Allow joining via shareable link
-                  <span className="text-sm text-muted-foreground block font-normal">
-                    Users can register via a shareable link, instead of needing
-                    a specific invite.
-                  </span>
-                </Label>
+            <div className="flex flex-col rounded-lg border p-4 gap-2">
+              <div className="flex flex-row items-center justify-between">
+                <div>
+                  <Label
+                    htmlFor="global-invite-link"
+                    className="text-base font-semibold"
+                  >
+                    Allow joining via shareable link
+                    <span className="text-sm text-muted-foreground block font-normal">
+                      Users can register via a shareable link, instead of
+                      needing a specific invite.
+                    </span>
+                  </Label>
+                </div>
+                <Switch id="global-invite-link" />
               </div>
-              <Switch id="global-invite-link" />
+              <div className="mt-2 relative">
+                <Input
+                  type="text"
+                  value="https://app.getinvite.com/invite/123456"
+                  readOnly
+                />
+                <div className="absolute right-1 top-1/2 -translate-y-1/2 flex flex-row gap-1">
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          size="icon"
+                          variant="outline"
+                          className="h-8 w-8"
+                        >
+                          <ClipboardCopy className="w-4 h-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Copy shareable link to clipboard</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          size="icon"
+                          variant="outline"
+                          className="h-8 w-8"
+                        >
+                          <RefreshCcw className="w-4 h-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Regenerate shareable link</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
+              </div>
             </div>
 
             <div className="flex flex-row items-center justify-between rounded-lg border p-4 gap-2">
