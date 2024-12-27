@@ -28,6 +28,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { Tagger, TaggerInput, TaggerTags } from "@/components/ui/tagger"
 
 export default async function TeamSettingsPage() {
   const session = await getUserSession()
@@ -101,19 +102,27 @@ export default async function TeamSettingsPage() {
               </div>
             </div>
 
-            <div className="flex flex-row items-center justify-between rounded-lg border p-4 gap-2">
-              <div>
-                <Label
-                  htmlFor="domain-restrictions"
-                  className="text-base font-semibold"
-                >
-                  Restrict members to specific domains
-                  <span className="text-sm text-muted-foreground block font-normal">
-                    Only allow members to join from specific domains.
-                  </span>
-                </Label>
+            <div className="flex flex-col rounded-lg border p-4 gap-2">
+              <div className="flex flex-row items-center justify-between">
+                <div>
+                  <Label
+                    htmlFor="domain-restrictions"
+                    className="text-base font-semibold"
+                  >
+                    Restrict members to specific domains
+                    <span className="text-sm text-muted-foreground block font-normal">
+                      Only allow members to join from specific domains.
+                    </span>
+                  </Label>
+                </div>
+                <Switch id="domain-restrictions" />
               </div>
-              <Switch id="domain-restrictions" />
+              <div className="mt-2">
+                <Tagger initialTags={["google.com"]}>
+                  <TaggerTags />
+                  <TaggerInput id="current-tags" />
+                </Tagger>
+              </div>
             </div>
           </form>
           <h3 className="text-xl mt-8">Team Members</h3>
