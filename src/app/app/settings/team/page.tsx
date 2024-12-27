@@ -21,7 +21,7 @@ import {
 import { getUserSession } from "@/actions/user/get-user-session"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { ClipboardCopy, RefreshCcw } from "lucide-react"
+import { ClipboardCopy, RefreshCcw, Trash } from "lucide-react"
 import {
   Tooltip,
   TooltipContent,
@@ -140,7 +140,7 @@ export default async function TeamSettingsPage() {
                       {user.users.name || "No Name"}
                     </TableCell>
                     <TableCell>{user.users.email}</TableCell>
-                    <TableCell className="text-right">
+                    <TableCell className="text-right flex flex-row gap-1">
                       <Select defaultValue={user.users_accounts.role}>
                         <SelectTrigger>
                           <SelectValue />
@@ -151,6 +151,22 @@ export default async function TeamSettingsPage() {
                           <SelectItem value="user">User</SelectItem>
                         </SelectContent>
                       </Select>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              size="icon"
+                              variant="ghost"
+                              className="w-11"
+                            >
+                              <Trash className="w-4 h-4" />
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Remove user from team</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </TableCell>
                   </TableRow>
                 ))}
