@@ -29,6 +29,17 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { Tagger, TaggerInput, TaggerTags } from "@/components/ui/tagger"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 export default async function TeamSettingsPage() {
   const session = await getUserSession()
@@ -160,22 +171,47 @@ export default async function TeamSettingsPage() {
                           <SelectItem value="user">User</SelectItem>
                         </SelectContent>
                       </Select>
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button
-                              size="icon"
-                              variant="ghost"
-                              className="w-11"
-                            >
-                              <Trash className="w-4 h-4" />
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>Remove user from team</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
+
+                      <AlertDialog>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <AlertDialogTrigger asChild>
+                                <Button
+                                  size="icon"
+                                  variant="ghost"
+                                  className="w-11"
+                                >
+                                  <Trash className="w-4 h-4" />
+                                </Button>
+                              </AlertDialogTrigger>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Remove user from team</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+
+                        <AlertDialogContent aria-describedby="remove-user-from-team-description">
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>
+                              Remove {user.users.name} from team?
+                            </AlertDialogTitle>
+                          </AlertDialogHeader>
+                          <AlertDialogDescription id="remove-user-from-team-description">
+                            They will be immediately removed from the team, and
+                            will need to be re-invited to join again.
+                          </AlertDialogDescription>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction asChild>
+                              <Button variant="destructive">
+                                Remove from team
+                              </Button>
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </TableCell>
                   </TableRow>
                 ))}
