@@ -4,8 +4,9 @@ import { db } from "@/db"
 import { usersAccountsTable } from "@/db/schema/users_accounts"
 import { auth } from "@/lib/auth"
 import { ServerActionResponse } from "@/lib/types"
-import { eq, and, or } from "drizzle-orm"
+import { eq, and } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
+import { fetchUsers } from "@/actions/account/fetch-users"
 
 export async function doRemoveUser(
   prevState: ServerActionResponse | undefined,
@@ -24,22 +25,10 @@ export async function doRemoveUser(
   const userId = formData.get("userId") as string
   const accountId = formData.get("accountId") as string
 
-  // Check the user removing the user is an admin or owner for the account
-  const userAccounts = await db
-    .select()
-    .from(usersAccountsTable)
-    .where(
-      and(
-        eq(usersAccountsTable.userId, session.user.id),
-        eq(usersAccountsTable.accountId, accountId),
-        or(
-          eq(usersAccountsTable.role, "admin"),
-          eq(usersAccountsTable.role, "owner"),
-        ),
-      ),
-    )
+  const users = await fetchUsers(accountId, ["admin", "owner"])
 
-  if (userAccounts.length === 0) {
+  // Check if the user removing the user is an admin or owner for the account
+  if (!users.some((user) => user.users.id === session.user.id)) {
     return {
       status: "error",
       messages: [
@@ -51,7 +40,13 @@ export async function doRemoveUser(
     }
   }
 
-  if (session.user.id === userId && userAccounts[0].role === "owner") {
+  // Check the user being removed is not an owner
+  if (
+    users.some(
+      (user) =>
+        user.users.id === userId && user.users_accounts.role === "owner",
+    )
+  ) {
     return {
       status: "error",
       messages: [
@@ -72,6 +67,7 @@ export async function doRemoveUser(
       ),
     )
 
+  // Check if the user was removed
   if (user.rowCount === 0) {
     return {
       status: "error",
