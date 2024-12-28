@@ -23,7 +23,7 @@ type TaggerFieldContextType = {
   addTag: (newTag: string) => void
   removeTag: (tagLabel: string) => void
   removeLastTag: () => void
-  inputRef: RefObject<HTMLInputElement> | null
+  inputRef: RefObject<HTMLInputElement | null>
 }
 
 export const TaggerFieldContext = createContext<TaggerFieldContextType>({
@@ -31,11 +31,11 @@ export const TaggerFieldContext = createContext<TaggerFieldContextType>({
   addTag: () => {},
   removeTag: () => {},
   removeLastTag: () => {},
-  inputRef: null,
+  inputRef: { current: null } as RefObject<HTMLInputElement | null>,
 })
 
 type TaggerFieldContextProviderProps = {
-  inputRef: RefObject<HTMLInputElement>
+  inputRef: RefObject<HTMLInputElement | null>
   children: ReactElement
   initialTags?: string[]
 }

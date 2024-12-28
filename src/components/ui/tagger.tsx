@@ -15,7 +15,7 @@ interface TaggerProps extends React.ComponentPropsWithoutRef<"div"> {
 }
 
 export const Tagger = ({ children, className, initialTags }: TaggerProps) => {
-  const inputRef = useRef<HTMLInputElement | null>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
     // Only match a click on the parent element, but not e.g. tags
