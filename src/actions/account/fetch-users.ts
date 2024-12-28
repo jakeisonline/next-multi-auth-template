@@ -4,12 +4,20 @@ import { db } from "@/db"
 import { usersTable } from "@/db/schema/users"
 import { usersAccountsTable } from "@/db/schema/users_accounts"
 import { UUID } from "@/lib/types"
-import { eq } from "drizzle-orm"
+import { and, eq, inArray } from "drizzle-orm"
 
-export async function fetchUsers(accountId: UUID) {
+export async function fetchUsers(
+  accountId: UUID,
+  roles?: ("admin" | "user" | "owner")[],
+) {
   return db
     .select()
     .from(usersTable)
     .innerJoin(usersAccountsTable, eq(usersAccountsTable.userId, usersTable.id))
-    .where(eq(usersAccountsTable.accountId, accountId))
+    .where(
+      and(
+        eq(usersAccountsTable.accountId, accountId),
+        roles ? inArray(usersAccountsTable.role, roles) : undefined,
+      ),
+    )
 }
