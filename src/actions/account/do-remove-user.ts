@@ -51,7 +51,7 @@ export async function doRemoveUser(
     }
   }
 
-  if (userAccounts[0].role === "owner") {
+  if (session.user.id === userId && userAccounts[0].role === "owner") {
     return {
       status: "error",
       messages: [
