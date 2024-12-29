@@ -31,6 +31,7 @@ import {
 import { Tagger, TaggerInput, TaggerTags } from "@/components/ui/tagger"
 import RemoveUser from "@/components/remove-user"
 import { redirect } from "next/navigation"
+import InviteUser from "@/components/invite-user"
 
 export default async function TeamSettingsPage() {
   const session = await getUserSession()
@@ -133,6 +134,7 @@ export default async function TeamSettingsPage() {
             </div>
           </form>
           <h3 className="text-xl mt-8">Team Members</h3>
+          <InviteUser accountId={session.user.accountId} />
           <div className="mt-4">
             <Table>
               <TableHeader>
